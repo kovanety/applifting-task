@@ -1,3 +1,5 @@
+export const API_URL = 'https://klikuj.herokuapp.com/api/v1'
+
 export const COLOR = {
   PRIMARY_BLUE: '#4990E2',
   DARK_BLUE: '#417EC1',

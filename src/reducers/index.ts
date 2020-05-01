@@ -1,3 +1,5 @@
 import { combineReducers } from 'redux'
 
-export const rootReducer = combineReducers({})
+import { scoreReducer } from './scoreReducer'
+
+export const rootReducer = combineReducers({ scoreReducer })

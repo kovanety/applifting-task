@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { FC } from 'react'
 import styled from 'styled-components'
 
-import { BORDER_RADIUS, COLOR } from '../../../constants'
+import {
+  BORDER_RADIUS,
+  COLOR,
+  FONT_SIZE,
+  FONT_WEIGHT,
+  TEXT_COLOR,
+} from '../../../constants'
+import { Scores } from '../../../types/Score'
+import { ScoreRow } from './ScoreRow'
+import { FETCH_STATE } from '../../../constants/fetchState'
+import { LoadingScreen } from '../LoadingScreen'
 
 const Container = styled.div`
-  max-width: 65rem;
+  max-width: 60rem;
   margin: auto;
   box-sizing: content-box;
   border-radius: ${BORDER_RADIUS};
@@ -12,14 +22,54 @@ const Container = styled.div`
   background: ${COLOR.WHITE};
 `
 
+const ScoreLabels = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 1rem 0.5rem 7rem;
+  font-size: ${FONT_SIZE.SMALL};
+  font-weight: ${FONT_WEIGHT.BOLD};
+  color: ${TEXT_COLOR.GREY};
+  text-transform: uppercase;
+`
 const TeaseText = styled.div`
   margin: 2rem auto;
   text-align: center;
   font-style: italic;
 `
 
-export const LeaderBoard = () => (
-  <Container>
-    <TeaseText>Want to be top? STFU and click!</TeaseText>
-  </Container>
-)
+interface LeaderBoardProps {
+  scores: Scores
+  fetchState: FETCH_STATE
+}
+
+export const LeaderBoard: FC<LeaderBoardProps> = ({
+  children,
+  scores,
+  fetchState,
+}) => {
+  if (fetchState === FETCH_STATE.FETCHING) {
+    return <LoadingScreen />
+  }
+
+  return (
+    <Container>
+      {children}
+      <ul>
+        <ScoreLabels>
+          <div>Team</div>
+          <div>Clicks</div>
+        </ScoreLabels>
+
+        {scores.map(({ order, team, clicks }) => (
+          <ScoreRow
+            key={order}
+            order={order}
+            clicks={clicks.toString()}
+            team={team}
+          />
+        ))}
+      </ul>
+      <TeaseText>Want to be top? STFU and click!</TeaseText>
+    </Container>
+  )
+}

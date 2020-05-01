@@ -26,22 +26,22 @@ const Rank = styled.div`
 `
 
 export interface ScoreRowProps {
-  rankNumber: number
-  name: string
-  points: string
+  order: number
+  team: string
+  clicks: string
   className?: string
 }
 
 export const ScoreRow: FC<ScoreRowProps> = ({
-  rankNumber,
-  name,
-  points,
+  order,
+  team,
+  clicks,
   className,
 }) => (
-  <Container isOdd={isOdd(rankNumber)} className={className}>
+  <Container isOdd={isOdd(order)} className={className}>
     <LeftColumnWrapper>
-      <Rank>{rankNumber}</Rank> {name}
+      <Rank>{order}</Rank> {team}
     </LeftColumnWrapper>
-    <div>{formatThousands(points)}</div>
+    <div>{formatThousands(clicks)}</div>
   </Container>
 )

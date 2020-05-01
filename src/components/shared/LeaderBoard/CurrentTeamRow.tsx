@@ -10,10 +10,6 @@ const StyledScoreRow = styled(ScoreRow)`
   color: ${TEXT_COLOR.WHITE};
 `
 
-export const CurrentTeamRow: FC<ScoreRowProps> = ({
-  rankNumber,
-  name,
-  points,
-}) => {
-  return <StyledScoreRow rankNumber={rankNumber} name={name} points={points} />
+export const CurrentTeamRow: FC<ScoreRowProps> = ({ order, team, clicks }) => {
+  return <StyledScoreRow order={order} team={team} clicks={clicks} />
 }

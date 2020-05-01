@@ -51,7 +51,6 @@ const ContentWrapper = styled.main`
 const Footer = styled.footer`
   padding: 2rem 0;
   margin: 0 auto;
-  font-size: ${FONT_SIZE.SMALL};
   font-style: italic;
 `
 

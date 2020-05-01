@@ -25,7 +25,12 @@ const StyledButton = styled.button<{ padding: ButtonPaddingValues }>`
   color: ${TEXT_COLOR.WHITE};
   text-transform: uppercase;
   cursor: pointer;
-  transition: background-position 0.7s;
+  transition: background-position 0.3s;
+
+  :disabled {
+    cursor: not-allowed;
+    background: ${COLOR.GREY};
+  }
 
   :hover {
     background-position: -100% 0;
@@ -38,14 +43,16 @@ type ButtonPaddingValues = typeof BUTTON_PADDING[ButtonPaddingKeys]
 interface ButtonProps {
   onClick: () => void
   padding?: ButtonPaddingValues
+  isDisabled?: boolean
 }
 
 export const Button: FC<ButtonProps> = ({
   children,
   onClick,
   padding = BUTTON_PADDING.SMALL,
+  isDisabled = false,
 }) => (
-  <StyledButton onClick={onClick} padding={padding}>
+  <StyledButton onClick={onClick} padding={padding} disabled={isDisabled}>
     {children}
   </StyledButton>
 )
