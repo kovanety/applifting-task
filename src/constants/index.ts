@@ -3,6 +3,7 @@ export const COLOR = {
   DARK_BLUE: '#417EC1',
   LIGHT_BLUE: '#DCE9F9',
   EXTRA_LIGHT_BLUE: '#ECF3FD',
+  GREY: '#D2D2D2',
   LIGHT_GREY: '#F2F2F2',
   WHITE: '#FFF',
 }
@@ -27,3 +28,10 @@ export const FONT_WEIGHT = {
   MEDIUM: '500',
   BOLD: '700',
 }
+
+export const BUTTON_PADDING = {
+  SMALL: '1rem 0',
+  LARGE: '2.5rem 0',
+}
+
+export const BORDER_RADIUS = '5px'

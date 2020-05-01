@@ -35,7 +35,7 @@ const Container = styled.div`
 
 const Header = styled.header`
   width: 100%;
-  padding: 10px 0;
+  padding: 1rem 0;
   text-align: center;
   background: ${COLOR.PRIMARY_BLUE};
   font-size: ${FONT_SIZE.MEDIUM};
@@ -49,7 +49,7 @@ const ContentWrapper = styled.main`
 `
 
 const Footer = styled.footer`
-  padding: 20px 0;
+  padding: 2rem 0;
   margin: 0 auto;
   font-size: ${FONT_SIZE.SMALL};
   font-style: italic;
