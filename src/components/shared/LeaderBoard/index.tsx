@@ -7,6 +7,7 @@ import {
   FONT_SIZE,
   FONT_WEIGHT,
   TEXT_COLOR,
+  LEADERBOARD_WIDTH,
 } from '../../../constants'
 import { Scores } from '../../../types/Score'
 import { ScoreRow } from './ScoreRow'
@@ -15,7 +16,7 @@ import { LoadingScreen } from '../LoadingScreen'
 import { CurrentTeamRow } from './CurrentTeamRow'
 
 const Container = styled.div`
-  max-width: 54rem;
+  max-width: ${LEADERBOARD_WIDTH};
   margin: auto;
   box-sizing: content-box;
   border-radius: ${BORDER_RADIUS};

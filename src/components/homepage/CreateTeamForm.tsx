@@ -4,6 +4,7 @@ import { navigate } from '@reach/router'
 
 import { Input } from '../shared/Input'
 import { Button } from '../shared/Button'
+import { SCREEN_SIZE } from '../../constants'
 
 const Form = styled.form`
   display: grid;
@@ -11,6 +12,11 @@ const Form = styled.form`
   grid-column-gap: 2rem;
   padding: 1rem 1.5rem;
   margin-bottom: 5rem;
+
+  ${SCREEN_SIZE.BELOW_MOBILE} {
+    grid-template-columns: 1fr;
+    grid-row-gap: 2rem;
+  }
 `
 
 const Label = styled.label`
@@ -37,7 +43,6 @@ export const CreateTeamForm = () => {
           value={teamName}
           placeholder="Your mom"
           onChange={(e) => onChange(e)}
-          isFullWidth
         />
       </div>
       <Button onClick={onSubmit} isDisabled={!teamName} type="button">

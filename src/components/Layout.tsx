@@ -1,7 +1,13 @@
 import React, { FC } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 
-import { COLOR, TEXT_COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants'
+import {
+  COLOR,
+  TEXT_COLOR,
+  FONT_SIZE,
+  FONT_WEIGHT,
+  SCREEN_SIZE,
+} from '../constants'
 import { Link } from '@reach/router'
 
 const GlobalStyle = createGlobalStyle`
@@ -52,12 +58,20 @@ const StyledLink = styled(Link)`
 
 const ContentWrapper = styled.main`
   flex-grow: 1;
+
+  ${SCREEN_SIZE.BELOW_MOBILE} {
+    padding: 0 1rem;
+  }
 `
 
 const Footer = styled.footer`
   padding: 2rem 0;
   margin: 0 auto;
   font-style: italic;
+
+  ${SCREEN_SIZE.BELOW_MOBILE} {
+    padding: 2 1rem;
+  }
 `
 
 export const Layout: FC = ({ children }) => (

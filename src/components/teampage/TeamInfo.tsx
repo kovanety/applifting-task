@@ -7,6 +7,8 @@ import {
   FONT_SIZE,
   BORDER_RADIUS,
   TEXT_COLOR,
+  SCREEN_SIZE,
+  LEADERBOARD_WIDTH,
 } from '../../constants'
 import { Input } from '../shared/Input'
 
@@ -25,14 +27,28 @@ const Highlight = styled.span`
 `
 
 const InputWithLabel = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-column-gap: 1rem;
+  max-width: ${LEADERBOARD_WIDTH};
+  margin: 0 auto;
+  padding: 0 2rem;
+
+  ${SCREEN_SIZE.BELOW_MOBILE} {
+    grid-template-columns: 1fr;
+    grid-row-gap: 1rem;
+    padding: 0;
+  }
 `
 
 const Label = styled.label`
-  margin-right: 1rem;
+  display: flex;
+  align-items: center;
   font-style: italic;
+
+  ${SCREEN_SIZE.BELOW_MOBILE} {
+    justify-content: center;
+  }
 `
 
 const InputWrapper = styled.div`

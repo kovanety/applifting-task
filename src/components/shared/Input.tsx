@@ -2,8 +2,8 @@ import React, { ChangeEvent, FC, FocusEvent } from 'react'
 import styled from 'styled-components'
 import { COLOR, TEXT_COLOR, BORDER_RADIUS, FONT_SIZE } from '../../constants'
 
-const StyledInput = styled.input<{ isFullWidth: boolean }>`
-  width: ${({ isFullWidth }) => isFullWidth && '100%'};
+const StyledInput = styled.input`
+  width: 100%;
   padding: 0.5rem 0.8rem;
   background: ${COLOR.WHITE};
   border-radius: ${BORDER_RADIUS};
@@ -24,7 +24,6 @@ interface InputProps {
   onBlur?: () => void
   placeholder?: string
   isReadOnly?: boolean
-  isFullWidth?: boolean
 }
 
 export const Input: FC<InputProps> = ({
@@ -35,7 +34,6 @@ export const Input: FC<InputProps> = ({
   onBlur,
   placeholder,
   isReadOnly = false,
-  isFullWidth = false,
 }) => (
   <StyledInput
     id={id}
@@ -45,7 +43,6 @@ export const Input: FC<InputProps> = ({
     placeholder={placeholder}
     value={value}
     readOnly={isReadOnly}
-    isFullWidth={isFullWidth}
     type="text"
   />
 )
