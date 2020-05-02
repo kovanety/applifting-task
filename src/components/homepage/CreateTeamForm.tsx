@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState, FormEvent } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 
@@ -32,10 +32,16 @@ export const CreateTeamForm = () => {
     setTeamName(e.target.value)
   }
 
-  const onSubmit = () => navigate(`/${teamName}`)
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (teamName) {
+      navigate(`/${teamName}`)
+    }
+  }
 
   return (
-    <Form>
+    <Form onSubmit={(e) => handleSubmit(e)}>
       <div>
         <Label htmlFor="teamName">Enter your team name:</Label>
         <Input
@@ -45,7 +51,7 @@ export const CreateTeamForm = () => {
           onChange={(e) => onChange(e)}
         />
       </div>
-      <Button onClick={onSubmit} isDisabled={!teamName} type="button">
+      <Button isDisabled={!teamName} type="submit">
         Click!
       </Button>
     </Form>

@@ -13,24 +13,24 @@ export const selectSurroundingClickers = (currentTeam: string) => {
   return createSelector([getScoreState], ({ scores }) => {
     //Avoids mutation of original data
     const scoreCopy = [...scores]
-    const NUMBER_OF_DISPLAYED_SCORES = 7
 
     const currentTeamScore = scoreCopy.find(({ team }) => currentTeam === team)
     const order = currentTeamScore ? currentTeamScore.order : -1
 
-    //If the current team is in the top 3 or the list is too short, display the first 7 teams
-    if (order < 4) {
-      return scoreCopy.slice(0, NUMBER_OF_DISPLAYED_SCORES)
+    const NUMBER_OF_DISPLAYED_SCORES = 7
+    let SCORE_END = order + 3
+
+    //If the current team is in the top 3, display the first 7 teams
+    if (scoreCopy.length - 1 < SCORE_END) {
+      SCORE_END = scoreCopy.length
     }
 
-    if (scoreCopy.length < order + 4) {
-      return scoreCopy.slice(
-        scoreCopy.length - NUMBER_OF_DISPLAYED_SCORES,
-        scoreCopy.length
-      )
+    //If the current end is at the end, display the last 7 teams
+    if (order < 4) {
+      SCORE_END = NUMBER_OF_DISPLAYED_SCORES
     }
-    //Display the current team score and 3 of the previous and following scores
-    return scoreCopy.slice(order - 4, order + 3)
+
+    return scoreCopy.slice(SCORE_END - NUMBER_OF_DISPLAYED_SCORES, SCORE_END)
   })
 }
 
