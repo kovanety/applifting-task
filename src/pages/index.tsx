@@ -20,8 +20,10 @@ export const HomePage: FC<RouteComponentProps> = () => {
   const fetchState = useSelector(selectScoreFetchState)
 
   useEffect(() => {
-    dispatch(getScores(true))
-  }, [dispatch])
+    if (scores.length === 0) {
+      dispatch(getScores(true))
+    }
+  }, [dispatch, scores])
 
   return (
     <>

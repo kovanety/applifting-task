@@ -10,7 +10,7 @@ import {
   TEXT_COLOR,
 } from '../../constants'
 
-const StyledButton = styled.button<{ padding: ButtonPaddingValues }>`
+const StyledButton = styled.button<{ padding: BUTTON_PADDING }>`
   width: 100%;
   padding: ${({ padding }) => padding};
   border-radius: ${BORDER_RADIUS};
@@ -36,14 +36,10 @@ const StyledButton = styled.button<{ padding: ButtonPaddingValues }>`
     background-position: -100% 0;
   }
 `
-
-type ButtonPaddingKeys = keyof typeof BUTTON_PADDING
-type ButtonPaddingValues = typeof BUTTON_PADDING[ButtonPaddingKeys]
-
 interface ButtonProps {
   onClick?: () => void
   type?: 'button' | 'submit'
-  padding?: ButtonPaddingValues
+  padding?: BUTTON_PADDING
   isDisabled?: boolean
 }
 

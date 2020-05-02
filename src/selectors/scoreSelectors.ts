@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
 import { ScoreReducerState } from '../reducers/scoreReducer'
+import { Scores } from '../types/Score'
 
 const getScoreState = ({ scoreReducer }: { scoreReducer: ScoreReducerState }) =>
   scoreReducer
@@ -9,9 +10,10 @@ export const selectTopTenClickers = createSelector(
   ({ scores }) => [...scores].slice(0, 10)
 )
 
-export const selectSurroundingClickers = (currentTeam?: string) => {
+export const selectSurroundingClickers = (currentTeam: string) => {
   return createSelector([getScoreState], ({ scores }) => {
-    const scoreCopy = [...scores]
+    //Avoids mutation of original data
+    const scoreCopy: Scores = JSON.parse(JSON.stringify(scores))
     const NUMBER_OF_DISPLAYED_SCORES = 7
 
     const currentTeamScore = scoreCopy.find(({ team }) => currentTeam === team)

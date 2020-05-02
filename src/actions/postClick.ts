@@ -15,9 +15,9 @@ const postClickFailed = (message: string) => ({
   message,
 })
 
-export const postClick = (session: string, team?: string): AppThunk => (
+export const postClick = (session: string, team: string): AppThunk => (
   dispatch
-) => {
+) =>
   axios
     .post(`${API_URL}/klik`, {
       team,
@@ -25,4 +25,3 @@ export const postClick = (session: string, team?: string): AppThunk => (
     })
     .then(({ data }) => dispatch(receiveClickInfo(data)))
     .catch((err: string) => dispatch(postClickFailed(err)))
-}

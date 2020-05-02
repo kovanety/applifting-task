@@ -41,14 +41,16 @@ const TeaseText = styled.div`
 interface LeaderBoardProps {
   scores: Scores
   fetchState?: FETCH_STATE
+  isFetching?: boolean
 }
 
 export const LeaderBoard: FC<LeaderBoardProps> = ({
   children,
   scores,
   fetchState,
+  isFetching,
 }) => {
-  if (fetchState === FETCH_STATE.FETCHING) {
+  if (fetchState === FETCH_STATE.FETCHING || isFetching) {
     return <LoadingScreen />
   }
 

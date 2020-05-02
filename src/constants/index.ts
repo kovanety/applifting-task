@@ -31,9 +31,9 @@ export const FONT_WEIGHT = {
   BOLD: '700',
 }
 
-export const BUTTON_PADDING = {
-  SMALL: '1rem 0',
-  LARGE: '2.5rem 0',
+export enum BUTTON_PADDING {
+  SMALL = '1rem 0',
+  LARGE = '2.5rem 0',
 }
 
 export const BORDER_RADIUS = '5px'

@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, FC } from 'react'
+import React, { useEffect, useCallback, useState, FC } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { RouteComponentProps } from '@reach/router'
@@ -29,8 +29,9 @@ interface GameProps extends RouteComponentProps {
   team?: string
 }
 
-export const Game: FC<GameProps> = ({ team }) => {
+export const Game: FC<GameProps> = ({ team = '' }) => {
   const dispatch = useDispatch()
+  const [isSessionGenerated, setIsSessionGenerated] = useState(false)
 
   const session = useSelector(selectSession)
   const scores = useSelector(selectSurroundingClickers(team))
@@ -44,19 +45,19 @@ export const Game: FC<GameProps> = ({ team }) => {
   )
 
   useEffect(() => {
-    //Create new session on page load
-    const newSession = generateId()
+    const postClickAndFetchScores = async () => {
+      //Create new session on page load
+      const newSession = generateId()
 
-    dispatch(createSession(newSession))
-    dispatch(postClick(newSession, team))
-  }, [dispatch, team])
-
-  useEffect(() => {
-    //Fetch the initial leaderboard after the 1st click is recorded
-    if (your_clicks === 1) {
-      dispatch(getScores(true))
+      dispatch(createSession(newSession))
+      dispatch(postClick(newSession, team))
     }
-  }, [dispatch, your_clicks, team])
+
+    postClickAndFetchScores().then(() => {
+      dispatch(getScores(true))
+      setIsSessionGenerated(true)
+    })
+  }, [dispatch, team])
 
   const onButtonClick = () => {
     dispatch(postClick(session, team))
@@ -66,7 +67,11 @@ export const Game: FC<GameProps> = ({ team }) => {
   return (
     <>
       <TeamInfo team={team} />
-      <LeaderBoard scores={scores} fetchState={fetchState}>
+      <LeaderBoard
+        scores={scores}
+        fetchState={fetchState}
+        isFetching={!isSessionGenerated}
+      >
         <ButtonContainer>
           <Button onClick={onButtonClick} padding={BUTTON_PADDING.LARGE}>
             Click!
