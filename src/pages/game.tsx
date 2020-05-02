@@ -71,6 +71,7 @@ export const Game: FC<GameProps> = ({ team = '' }) => {
         scores={scores}
         fetchState={fetchState}
         isFetching={!isSessionGenerated}
+        currentTeam={team}
       >
         <ButtonContainer>
           <Button onClick={onButtonClick} padding={BUTTON_PADDING.LARGE}>

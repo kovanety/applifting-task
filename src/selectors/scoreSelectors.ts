@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect'
 import { ScoreReducerState } from '../reducers/scoreReducer'
-import { Scores } from '../types/Score'
 
 const getScoreState = ({ scoreReducer }: { scoreReducer: ScoreReducerState }) =>
   scoreReducer
@@ -13,15 +12,11 @@ export const selectTopTenClickers = createSelector(
 export const selectSurroundingClickers = (currentTeam: string) => {
   return createSelector([getScoreState], ({ scores }) => {
     //Avoids mutation of original data
-    const scoreCopy: Scores = JSON.parse(JSON.stringify(scores))
+    const scoreCopy = [...scores]
     const NUMBER_OF_DISPLAYED_SCORES = 7
 
     const currentTeamScore = scoreCopy.find(({ team }) => currentTeam === team)
     const order = currentTeamScore ? currentTeamScore.order : -1
-
-    if (currentTeamScore) {
-      currentTeamScore.isCurrent = true
-    }
 
     //If the current team is in the top 3 or the list is too short, display the first 7 teams
     if (order < 4) {

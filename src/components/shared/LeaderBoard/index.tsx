@@ -43,6 +43,7 @@ interface LeaderBoardProps {
   scores: Scores
   fetchState?: FETCH_STATE
   isFetching?: boolean
+  currentTeam?: string
 }
 
 export const LeaderBoard: FC<LeaderBoardProps> = ({
@@ -50,6 +51,7 @@ export const LeaderBoard: FC<LeaderBoardProps> = ({
   scores,
   fetchState,
   isFetching,
+  currentTeam,
 }) => {
   if (fetchState === FETCH_STATE.FETCHING || isFetching) {
     return <LoadingScreen />
@@ -64,8 +66,8 @@ export const LeaderBoard: FC<LeaderBoardProps> = ({
           <div>Clicks</div>
         </ScoreLabels>
 
-        {scores.map(({ order, team, clicks, isCurrent }) => {
-          if (isCurrent) {
+        {scores.map(({ order, team, clicks }) => {
+          if (currentTeam === team) {
             return (
               <CurrentTeamRow
                 key={order}
