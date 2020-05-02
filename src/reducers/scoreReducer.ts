@@ -1,7 +1,13 @@
+import { Action } from 'redux'
+
 import { SCORE_ACTION_TYPES } from '../constants/actionTypes'
-import { Scores } from '../types/Score'
-import { ScoreAction } from '../actions/getScores'
 import { FETCH_STATE } from '../constants/fetchState'
+import { Scores } from '../types/Score'
+
+export interface ScoreAction extends Action {
+  scores?: Scores
+  message?: string
+}
 
 export interface ScoreReducerState {
   error: string
@@ -19,7 +25,6 @@ export const scoreReducer = (state = initialState, action: ScoreAction) => {
   switch (action.type) {
     case SCORE_ACTION_TYPES.SCORE_LIST_DONE:
       return {
-        ...state,
         error: '',
         scores: action.scores,
         fetchState: FETCH_STATE.DONE,

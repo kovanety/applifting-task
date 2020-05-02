@@ -41,7 +41,8 @@ type ButtonPaddingKeys = keyof typeof BUTTON_PADDING
 type ButtonPaddingValues = typeof BUTTON_PADDING[ButtonPaddingKeys]
 
 interface ButtonProps {
-  onClick: () => void
+  onClick?: () => void
+  type?: 'button' | 'submit'
   padding?: ButtonPaddingValues
   isDisabled?: boolean
 }
@@ -49,10 +50,16 @@ interface ButtonProps {
 export const Button: FC<ButtonProps> = ({
   children,
   onClick,
+  type,
   padding = BUTTON_PADDING.SMALL,
   isDisabled = false,
 }) => (
-  <StyledButton onClick={onClick} padding={padding} disabled={isDisabled}>
+  <StyledButton
+    onClick={onClick}
+    padding={padding}
+    disabled={isDisabled}
+    type={type}
+  >
     {children}
   </StyledButton>
 )

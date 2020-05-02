@@ -5,11 +5,16 @@ import { Router } from '@reach/router'
 import store from './store'
 
 import { HomePage } from './pages'
+import { Game } from './pages/game'
+import { Layout } from './components/Layout'
 
 export const App = () => (
   <Provider store={store}>
-    <Router>
-      <HomePage path="/" />
-    </Router>
+    <Layout>
+      <Router>
+        <HomePage path="/" />
+        <Game path="/:team" />
+      </Router>
+    </Layout>
   </Provider>
 )

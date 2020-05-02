@@ -1,2 +1,2 @@
-export const formatThousands = (numberToFormat: string) =>
-  numberToFormat.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, `$1 `)
+export const formatThousands = (numberToFormat: number) =>
+  numberToFormat.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, `$1 `)

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+
 import { COLOR, TEXT_COLOR, FONT_WEIGHT } from '../../constants'
 
 const Container = styled.div`

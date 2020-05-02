@@ -28,7 +28,7 @@ const Rank = styled.div`
 export interface ScoreRowProps {
   order: number
   team: string
-  clicks: string
+  clicks: number
   className?: string
 }
 

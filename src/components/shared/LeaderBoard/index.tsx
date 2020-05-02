@@ -12,9 +12,10 @@ import { Scores } from '../../../types/Score'
 import { ScoreRow } from './ScoreRow'
 import { FETCH_STATE } from '../../../constants/fetchState'
 import { LoadingScreen } from '../LoadingScreen'
+import { CurrentTeamRow } from './CurrentTeamRow'
 
 const Container = styled.div`
-  max-width: 60rem;
+  max-width: 54rem;
   margin: auto;
   box-sizing: content-box;
   border-radius: ${BORDER_RADIUS};
@@ -39,7 +40,7 @@ const TeaseText = styled.div`
 
 interface LeaderBoardProps {
   scores: Scores
-  fetchState: FETCH_STATE
+  fetchState?: FETCH_STATE
 }
 
 export const LeaderBoard: FC<LeaderBoardProps> = ({
@@ -60,14 +61,21 @@ export const LeaderBoard: FC<LeaderBoardProps> = ({
           <div>Clicks</div>
         </ScoreLabels>
 
-        {scores.map(({ order, team, clicks }) => (
-          <ScoreRow
-            key={order}
-            order={order}
-            clicks={clicks.toString()}
-            team={team}
-          />
-        ))}
+        {scores.map(({ order, team, clicks, isCurrent }) => {
+          if (isCurrent) {
+            return (
+              <CurrentTeamRow
+                key={order}
+                order={order}
+                clicks={clicks}
+                team={team}
+              />
+            )
+          }
+          return (
+            <ScoreRow key={order} order={order} clicks={clicks} team={team} />
+          )
+        })}
       </ul>
       <TeaseText>Want to be top? STFU and click!</TeaseText>
     </Container>

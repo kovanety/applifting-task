@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import { COLOR, TEXT_COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants'
+import { Link } from '@reach/router'
 
 const GlobalStyle = createGlobalStyle`
  * {
@@ -44,6 +45,11 @@ const Header = styled.header`
   text-transform: uppercase;
 `
 
+const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+`
+
 const ContentWrapper = styled.main`
   flex-grow: 1;
 `
@@ -57,7 +63,9 @@ const Footer = styled.footer`
 export const Layout: FC = ({ children }) => (
   <Container>
     <GlobalStyle />
-    <Header>Stfuandclick.com</Header>
+    <Header>
+      <StyledLink to="/">Stfuandclick.com</StyledLink>
+    </Header>
     <ContentWrapper>{children}</ContentWrapper>
     <Footer>
       If you don't like this page, it's{' '}

@@ -21,8 +21,8 @@ export const FONT_SIZE = {
   SMALL: '1.4rem',
   BASE: '1.6rem',
   MEDIUM: '1.8rem',
-  LARGE: '2.4rem',
-  EXTRA_LARGE: '3rem',
+  LARGE: '3rem',
+  EXTRA_LARGE: '4.4rem',
 }
 
 export const FONT_WEIGHT = {

@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from 'react'
 import styled from 'styled-components'
+import { navigate } from '@reach/router'
 
 import { Input } from '../shared/Input'
 import { Button } from '../shared/Button'
@@ -25,18 +26,21 @@ export const CreateTeamForm = () => {
     setTeamName(e.target.value)
   }
 
+  const onSubmit = () => navigate(`/${teamName}`)
+
   return (
     <Form>
       <div>
-        <Label htmlFor="teamName">Enter your name:</Label>
+        <Label htmlFor="teamName">Enter your team name:</Label>
         <Input
           id="teamName"
           value={teamName}
           placeholder="Your mom"
           onChange={(e) => onChange(e)}
+          isFullWidth
         />
       </div>
-      <Button onClick={() => {}} isDisabled={!teamName}>
+      <Button onClick={onSubmit} isDisabled={!teamName} type="button">
         Click!
       </Button>
     </Form>
