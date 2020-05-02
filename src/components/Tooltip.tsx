@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { BORDER_RADIUS, TEXT_COLOR } from '../../constants'
+import { BORDER_RADIUS, TEXT_COLOR } from '../constants'
 
 export const Tooltip = styled.div<{ isVisible: boolean }>`
   position: absolute;

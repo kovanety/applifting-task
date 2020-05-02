@@ -8,7 +8,7 @@ import {
   BORDER_RADIUS,
   FONT_WEIGHT,
   TEXT_COLOR,
-} from '../../constants'
+} from '../constants'
 
 const StyledButton = styled.button<{ padding: BUTTON_PADDING }>`
   width: 100%;

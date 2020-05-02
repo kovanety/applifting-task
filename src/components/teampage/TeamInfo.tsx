@@ -9,8 +9,8 @@ import {
   LEADERBOARD_WIDTH,
 } from '../../constants'
 
-import { Tooltip } from '../shared/Tooltip'
-import { Input } from '../shared/Input'
+import { Tooltip } from '../Tooltip'
+import { Input } from '../Input'
 
 const Container = styled.div`
   margin: 5rem auto 1rem;

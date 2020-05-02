@@ -1,4 +1,5 @@
 import { Action } from 'redux'
+
 import { SESSION_ACTION_TYPES } from '../constants/actionTypes'
 
 export interface SessionAction extends Action {

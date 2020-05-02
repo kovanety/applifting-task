@@ -16,9 +16,9 @@ import {
 import { getScores } from '../actions/getScores'
 import { BUTTON_PADDING } from '../constants'
 
-import { LeaderBoard } from '../components/shared/LeaderBoard'
+import { LeaderBoard } from '../components/LeaderBoard'
 import { ClickCounter } from '../components/teampage/ClickCounter'
-import { Button } from '../components/shared/Button'
+import { Button } from '../components/Button'
 import { TeamInfo } from '../components/teampage/TeamInfo'
 
 const ButtonContainer = styled.div`
@@ -50,7 +50,7 @@ export const Game: FC<GameProps> = ({ team = '' }) => {
       const newSession = generateId()
 
       dispatch(createSession(newSession))
-      dispatch(postClick(newSession, team))
+      return dispatch(postClick(newSession, team))
     }
 
     postClickAndFetchScores().then(() => {

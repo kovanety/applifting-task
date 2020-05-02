@@ -8,7 +8,7 @@ import {
   selectScoreFetchState,
 } from '../selectors/scoreSelectors'
 
-import { LeaderBoard } from '../components/shared/LeaderBoard'
+import { LeaderBoard } from '../components/LeaderBoard'
 import { Quote } from '../components/homepage/Quote'
 import { Ribbon } from '../components/homepage/Ribbon'
 import { CreateTeamForm } from '../components/homepage/CreateTeamForm'

@@ -8,10 +8,10 @@ import {
   FONT_WEIGHT,
   TEXT_COLOR,
   LEADERBOARD_WIDTH,
-} from '../../../constants'
-import { Scores } from '../../../types/Score'
+} from '../../constants'
+import { Scores } from '../../types/Score'
 import { ScoreRow } from './ScoreRow'
-import { FETCH_STATE } from '../../../constants/fetchState'
+import { FETCH_STATE } from '../../constants/fetchState'
 import { LoadingScreen } from '../LoadingScreen'
 import { CurrentTeamRow } from './CurrentTeamRow'
 

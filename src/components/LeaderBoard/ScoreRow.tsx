@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 
-import { COLOR, FONT_WEIGHT } from '../../../constants'
-import { isOdd } from '../../../utils/isOdd'
-import { formatThousands } from '../../../utils/formatThousands'
+import { COLOR, FONT_WEIGHT } from '../../constants'
+import { isOdd } from '../../utils/isOdd'
+import { formatThousands } from '../../utils/formatThousands'
 
 const Container = styled.li<{ isOdd: boolean }>`
   display: flex;

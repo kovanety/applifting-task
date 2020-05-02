@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, FocusEvent } from 'react'
 import styled from 'styled-components'
-import { COLOR, TEXT_COLOR, BORDER_RADIUS, FONT_SIZE } from '../../constants'
+import { COLOR, TEXT_COLOR, BORDER_RADIUS, FONT_SIZE } from '../constants'
 
 const StyledInput = styled.input`
   width: 100%;

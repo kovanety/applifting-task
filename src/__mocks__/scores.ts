@@ -1,6 +1,6 @@
 import { Scores } from '../types/Score'
 
-export const MockScores: Scores = [
+export const MOCK_SCORES: Scores = [
   {
     team: 'Beckie',
     clicks: 1,

@@ -2,8 +2,8 @@ import React, { ChangeEvent, useState } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 
-import { Input } from '../shared/Input'
-import { Button } from '../shared/Button'
+import { Input } from '../Input'
+import { Button } from '../Button'
 import { SCREEN_SIZE } from '../../constants'
 
 const Form = styled.form`
