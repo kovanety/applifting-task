@@ -7,6 +7,7 @@ import {
   selectTopTenClickers,
   selectScoreFetchState,
 } from '../selectors/scoreSelectors'
+import { FETCH_STATE } from '../constants/fetchState'
 
 import { LeaderBoard } from '../components/LeaderBoard'
 import { Quote } from '../components/homepage/Quote'
@@ -20,10 +21,10 @@ export const HomePage: FC<RouteComponentProps> = () => {
   const fetchState = useSelector(selectScoreFetchState)
 
   useEffect(() => {
-    if (scores.length === 0) {
+    if (fetchState !== FETCH_STATE.DONE) {
       dispatch(getScores(true))
     }
-  }, [dispatch, scores])
+  }, [dispatch, fetchState])
 
   return (
     <>
