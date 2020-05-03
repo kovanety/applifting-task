@@ -16,15 +16,15 @@ The order of the imports in each folder is as follows:
 
 In order to run the project [node](https://nodejs.org/en/) and [yarn](https://classic.yarnpkg.com/en/) need to be installed.
 
-### yarn start
+`yarn start`
 
 Runs the app in the development mode.
 
-### yarn build
+`yarn build`
 
 Build the app for production.
 
-### yarn test
+`yarn test`
 
 Runs the available tests.
 
