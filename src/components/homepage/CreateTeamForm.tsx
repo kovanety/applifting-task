@@ -36,7 +36,7 @@ export const CreateTeamForm = () => {
     e.preventDefault()
 
     if (teamName) {
-      navigate(`/${teamName}`)
+      navigate(`/${teamName}`, { state: { shouldPost: true } })
     }
   }
 

@@ -1,12 +1,9 @@
-import React, { useEffect, useCallback, useState, FC } from 'react'
-import styled from 'styled-components'
+import React, { useEffect, useState, FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RouteComponentProps } from '@reach/router'
+import { RouteComponentProps, useLocation } from '@reach/router'
 import { v4 as generateId } from 'uuid'
-import { debounce } from 'throttle-debounce'
 
-import { selectSession } from '../selectors/sessionSelectors'
-import { postClick } from '../actions/postClick'
+import { handleClick } from '../actions/handleClick'
 import { createSession } from '../actions/createSession'
 import { selectClickScore } from '../selectors/clickSelectors'
 import {
@@ -14,16 +11,15 @@ import {
   selectScoreFetchState,
 } from '../selectors/scoreSelectors'
 import { getScores } from '../actions/getScores'
-import { BUTTON_PADDING } from '../constants'
+import { RESTMethods } from '../constants/RESTmethods'
+import { socketClient } from '../utils/socketClient'
+import { selectSession } from '../selectors/sessionSelectors'
 
 import { LeaderBoard } from '../components/LeaderBoard'
 import { ClickCounter } from '../components/teampage/ClickCounter'
-import { Button } from '../components/Button'
 import { TeamInfo } from '../components/teampage/TeamInfo'
-
-const ButtonContainer = styled.div`
-  padding: 1rem;
-`
+import { ClickButton } from '../components/teampage/ClickButton'
+import { useDebounceScoreFetch } from '../utils/useDebounceScoreFetch'
 
 interface GameProps extends RouteComponentProps {
   team?: string
@@ -31,6 +27,8 @@ interface GameProps extends RouteComponentProps {
 
 export const Game: FC<GameProps> = ({ team = '' }) => {
   const dispatch = useDispatch()
+  const fetchScores = useDebounceScoreFetch()
+  const { state } = useLocation()
   const [isSessionGenerated, setIsSessionGenerated] = useState(false)
 
   const session = useSelector(selectSession)
@@ -38,31 +36,41 @@ export const Game: FC<GameProps> = ({ team = '' }) => {
   const fetchState = useSelector(selectScoreFetchState)
   const { your_clicks, team_clicks } = useSelector(selectClickScore)
 
-  //Delay the leaderboard fetch to improve performance
-  const debounceScoreFetch = useCallback(
-    debounce(200, () => dispatch(getScores())),
-    []
-  )
+  useEffect(() => {
+    //Listen for clicks and fetch new team clicks
+    socketClient.on(
+      'click',
+      (receivedTeam: string, receivedSession: string) => {
+        const isSameSession = session && receivedSession !== session
+
+        if (receivedTeam === team && isSameSession) {
+          dispatch(handleClick(session, team, RESTMethods.GET))
+          fetchScores()
+        }
+      }
+    )
+  }, [dispatch, session, team, fetchScores])
 
   useEffect(() => {
-    const postClickAndFetchScores = async () => {
+    const handleClickAndFetchScores = async () => {
       //Create new session on page load
       const newSession = generateId()
+      const shouldPost = (state as { shouldPost: boolean })?.shouldPost
+      const method = shouldPost ? RESTMethods.POST : RESTMethods.GET
+
+      if (shouldPost) {
+        socketClient.emit('click', team, newSession)
+      }
 
       dispatch(createSession(newSession))
-      return dispatch(postClick(newSession, team))
+      return dispatch(handleClick(newSession, team, method))
     }
 
-    postClickAndFetchScores().then(() => {
+    handleClickAndFetchScores().then(() => {
       dispatch(getScores(true))
       setIsSessionGenerated(true)
     })
-  }, [dispatch, team])
-
-  const onButtonClick = () => {
-    dispatch(postClick(session, team))
-    debounceScoreFetch()
-  }
+  }, [dispatch, team, state])
 
   return (
     <>
@@ -73,11 +81,7 @@ export const Game: FC<GameProps> = ({ team = '' }) => {
         isFetching={!isSessionGenerated}
         currentTeam={team}
       >
-        <ButtonContainer>
-          <Button onClick={onButtonClick} padding={BUTTON_PADDING.LARGE}>
-            Click!
-          </Button>
-        </ButtonContainer>
+        <ClickButton team={team} />
         <ClickCounter teamScore={team_clicks} yourScore={your_clicks} />
       </LeaderBoard>
     </>

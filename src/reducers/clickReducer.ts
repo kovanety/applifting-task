@@ -26,6 +26,12 @@ export const clickReducer = (state = initialState, action: ClickAction) => {
         teamScore: action.teamScore,
       }
 
+    case CLICK_ACTION_TYPES.CLICK_FETCHING:
+      return {
+        ...state,
+        error: '',
+      }
+
     case CLICK_ACTION_TYPES.CLICK_FAILED:
       return {
         ...state,

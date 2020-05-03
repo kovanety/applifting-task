@@ -1,4 +1,5 @@
-export const API_URL = 'https://klikuj.herokuapp.com/api/v1'
+export const SERVER_URL = 'https://applifting-be.herokuapp.com'
+export const API_URL = `${SERVER_URL}/api`
 
 export enum COLOR {
   PRIMARY_BLUE = '#4990E2',

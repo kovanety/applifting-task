@@ -11,7 +11,7 @@ export const selectTopTenClickers = createSelector(
 
 export const selectSurroundingClickers = (currentTeam: string) => {
   return createSelector([getScoreState], ({ scores }) => {
-    //Avoids mutation of original data
+    //Prevent mutation of original data
     const scoreCopy = [...scores]
 
     const currentTeamScore = scoreCopy.find(({ team }) => currentTeam === team)
@@ -25,7 +25,7 @@ export const selectSurroundingClickers = (currentTeam: string) => {
       SCORE_END = scoreCopy.length
     }
 
-    //If the current end is at the end, display the last 7 teams
+    //If the current end is near the end, display the last 7 teams
     if (order < 4) {
       SCORE_END = NUMBER_OF_DISPLAYED_SCORES
     }
