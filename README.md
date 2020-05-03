@@ -1,4 +1,4 @@
-This project was created as an interview challenge for (Applifting)[https://applifting.cz/]
+This project was created as an interview challenge for [Applifting](https://applifting.cz/).
 
 The demo of the app can be found [here](https://applifting-task.now.sh/).
 
