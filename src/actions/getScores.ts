@@ -9,7 +9,7 @@ const requestScores = () => ({
   type: SCORE_ACTION_TYPES.SCORE_LIST_FETCHING,
 })
 
-const requestInitialScores = () => ({
+export const requestInitialScores = () => ({
   type: SCORE_ACTION_TYPES.SCORE_LIST_INITIAL_FETCHING,
 })
 

@@ -34,6 +34,7 @@ On top of the required libraries, this project also utilizes several others:
 
 - [styled-components](https://styled-components.com/): Component based approach to CSS styling
 - [axios](https://github.com/axios/axios): Client for communication with BE
+- [socket.io](https://socket.io/): Enables bidirectional communication between the client and the server
 - [@reach/router](https://reach.tech/router): Simple router for react
 - [uuid](https://www.npmjs.com/package/uuid): UUID generator
 - [throttle-debounce](https://www.npmjs.com/package/throttle-debounce): Collection of utils for throttling and debouncing functions

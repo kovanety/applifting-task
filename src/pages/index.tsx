@@ -2,7 +2,7 @@ import React, { useEffect, FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RouteComponentProps } from '@reach/router'
 
-import { getScores } from '../actions/getScores'
+import { getScores, requestInitialScores } from '../actions/getScores'
 import {
   selectTopTenClickers,
   selectScoreFetchState,
@@ -24,7 +24,12 @@ export const HomePage: FC<RouteComponentProps> = () => {
     if (fetchState !== FETCH_STATE.DONE) {
       dispatch(getScores(true))
     }
-  }, [dispatch, fetchState])
+
+    //Reset the score fetchState on page unmount
+    return () => {
+      dispatch(requestInitialScores())
+    }
+  }, [dispatch])
 
   return (
     <>
