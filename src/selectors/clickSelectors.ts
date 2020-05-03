@@ -5,3 +5,9 @@ export const selectClickScore = ({
 }: {
   clickReducer: ClickReducerState
 }) => clickReducer.teamScore
+
+export const selectClickFetchState = ({
+  clickReducer,
+}: {
+  clickReducer: ClickReducerState
+}) => clickReducer.fetchState

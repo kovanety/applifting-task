@@ -26,6 +26,7 @@ export const ClickButton: FC<ClickButtonProps> = ({ team }) => {
 
   const onButtonClick = () => {
     dispatch(handleClick(session, team, RESTMethods.POST))
+    //Send message to other users
     socketClient.emit('click', team, session)
     fetchScores()
   }

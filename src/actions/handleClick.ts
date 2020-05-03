@@ -25,7 +25,7 @@ export const handleClick = (
   team: string,
   method: RESTMethods
 ): AppThunk => (dispatch) => {
-  dispatch(requestClick)
+  dispatch(requestClick())
 
   const requestBody = { team, session }
 

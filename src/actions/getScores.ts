@@ -9,6 +9,10 @@ const requestScores = () => ({
   type: SCORE_ACTION_TYPES.SCORE_LIST_FETCHING,
 })
 
+const requestInitialScores = () => ({
+  type: SCORE_ACTION_TYPES.SCORE_LIST_INITIAL_FETCHING,
+})
+
 const receiveScores = (scores: Scores) => ({
   type: SCORE_ACTION_TYPES.SCORE_LIST_DONE,
   scores,
@@ -20,8 +24,9 @@ const scoreFetchFailed = (message: string) => ({
 })
 
 export const getScores = (isInitialLoad?: boolean): AppThunk => (dispatch) => {
-  //Change fetchState to "FETCHING" only on the initial load
   if (isInitialLoad) {
+    dispatch(requestInitialScores())
+  } else {
     dispatch(requestScores())
   }
 

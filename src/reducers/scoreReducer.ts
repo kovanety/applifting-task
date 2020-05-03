@@ -18,7 +18,7 @@ export interface ScoreReducerState {
 const initialState: ScoreReducerState = {
   error: '',
   scores: [],
-  fetchState: FETCH_STATE.FETCHING,
+  fetchState: FETCH_STATE.INITIAL_FETCHING,
 }
 
 export const scoreReducer = (state = initialState, action: ScoreAction) => {
@@ -28,6 +28,13 @@ export const scoreReducer = (state = initialState, action: ScoreAction) => {
         error: '',
         scores: action.scores,
         fetchState: FETCH_STATE.DONE,
+      }
+
+    case SCORE_ACTION_TYPES.SCORE_LIST_INITIAL_FETCHING:
+      return {
+        ...state,
+        error: '',
+        fetchState: FETCH_STATE.INITIAL_FETCHING,
       }
 
     case SCORE_ACTION_TYPES.SCORE_LIST_FETCHING:
