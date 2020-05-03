@@ -41,9 +41,9 @@ export const Game: FC<GameProps> = ({ team = '' }) => {
     socketClient.on(
       'click',
       (receivedTeam: string, receivedSession: string) => {
-        const isSameSession = session && receivedSession !== session
+        const isNotSameSession = session && receivedSession !== session
         //Only fetch the clicks when the message is from the same team, but a different user
-        if (receivedTeam === team && isSameSession) {
+        if (receivedTeam === team && isNotSameSession) {
           dispatch(handleClick(session, team, RESTMethods.GET))
           fetchScores()
         }
