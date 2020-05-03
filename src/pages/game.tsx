@@ -53,6 +53,11 @@ export const Game: FC<GameProps> = ({ team = '' }) => {
         }
       }
     )
+
+    //Disconnect socket on unmount
+    return () => {
+      socketClient.off('click')
+    }
   }, [dispatch, session, team, fetchScores])
 
   useEffect(() => {
