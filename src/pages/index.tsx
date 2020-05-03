@@ -34,7 +34,7 @@ export const HomePage: FC<RouteComponentProps> = () => {
   return (
     <>
       <Quote />
-      <LeaderBoard scores={scores} fetchState={fetchState}>
+      <LeaderBoard scores={scores}>
         <CreateTeamForm />
         <Ribbon />
       </LeaderBoard>

@@ -38,3 +38,8 @@ export const selectScoreFetchState = createSelector(
   [getScoreState],
   ({ fetchState }) => fetchState
 )
+
+export const selectScoreError = createSelector(
+  [getScoreState],
+  ({ error }) => error
+)

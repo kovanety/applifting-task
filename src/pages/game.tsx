@@ -5,10 +5,7 @@ import { v4 as generateId } from 'uuid'
 
 import { handleClick } from '../actions/handleClick'
 import { createSession } from '../actions/createSession'
-import {
-  selectClickScore,
-  selectClickFetchState,
-} from '../selectors/clickSelectors'
+import { selectClickFetchState } from '../selectors/clickSelectors'
 import {
   selectSurroundingClickers,
   selectScoreFetchState,
@@ -38,7 +35,6 @@ export const Game: FC<GameProps> = ({ team = '' }) => {
   const scores = useSelector(selectSurroundingClickers(team))
   const leaderboardFetchState = useSelector(selectScoreFetchState)
   const clickFetchState = useSelector(selectClickFetchState)
-  const { your_clicks, team_clicks } = useSelector(selectClickScore)
 
   useEffect(() => {
     //Listen for clicks and fetch new team clicks
@@ -79,7 +75,7 @@ export const Game: FC<GameProps> = ({ team = '' }) => {
     //Fetch the leaderboard after the initial click response is loaded
     if (
       leaderboardFetchState === FETCH_STATE.INITIAL_FETCHING &&
-      clickFetchState === FETCH_STATE.DONE
+      clickFetchState !== FETCH_STATE.FETCHING
     )
       dispatch(getScores())
   }, [leaderboardFetchState, clickFetchState, dispatch])
@@ -87,13 +83,9 @@ export const Game: FC<GameProps> = ({ team = '' }) => {
   return (
     <>
       <TeamInfo team={team} />
-      <LeaderBoard
-        scores={scores}
-        fetchState={leaderboardFetchState}
-        currentTeam={team}
-      >
+      <LeaderBoard scores={scores} currentTeam={team}>
         <ClickButton team={team} />
-        <ClickCounter teamScore={team_clicks} yourScore={your_clicks} />
+        <ClickCounter />
       </LeaderBoard>
     </>
   )

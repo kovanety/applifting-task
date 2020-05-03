@@ -33,5 +33,5 @@ export const getScores = (isInitialLoad?: boolean): AppThunk => (dispatch) => {
   axios
     .get(`${API_URL}/leaderboard`)
     .then(({ data }) => dispatch(receiveScores(data)))
-    .catch((err: string) => dispatch(scoreFetchFailed(err)))
+    .catch(() => dispatch(scoreFetchFailed('Something went wrong :(')))
 }

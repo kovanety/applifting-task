@@ -1,13 +1,16 @@
+import { createSelector } from 'reselect'
+
 import { ClickReducerState } from '../reducers/clickReducer'
 
-export const selectClickScore = ({
-  clickReducer,
-}: {
-  clickReducer: ClickReducerState
-}) => clickReducer.teamScore
+const getClickState = ({ clickReducer }: { clickReducer: ClickReducerState }) =>
+  clickReducer
 
-export const selectClickFetchState = ({
-  clickReducer,
-}: {
-  clickReducer: ClickReducerState
-}) => clickReducer.fetchState
+export const selectClickScore = createSelector(
+  [getClickState],
+  ({ teamScore }) => teamScore
+)
+
+export const selectClickFetchState = createSelector(
+  [getClickState],
+  ({ fetchState }) => fetchState
+)

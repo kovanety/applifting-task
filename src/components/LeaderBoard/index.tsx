@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 import {
   BORDER_RADIUS,
@@ -10,10 +11,16 @@ import {
   LEADERBOARD_WIDTH,
 } from '../../constants'
 import { Scores } from '../../types/Score'
-import { ScoreRow } from './ScoreRow'
+import {
+  selectScoreFetchState,
+  selectScoreError,
+} from '../../selectors/scoreSelectors'
 import { FETCH_STATE } from '../../constants/fetchState'
+
+import { ScoreRow } from './ScoreRow'
 import { LoadingScreen } from '../LoadingScreen'
 import { CurrentTeamRow } from './CurrentTeamRow'
+import { ErrorMessage } from '../ErrorMessage'
 
 const Container = styled.div`
   max-width: ${LEADERBOARD_WIDTH};
@@ -41,18 +48,23 @@ const TeaseText = styled.div`
 
 interface LeaderBoardProps {
   scores: Scores
-  fetchState?: FETCH_STATE
   currentTeam?: string
 }
 
 export const LeaderBoard: FC<LeaderBoardProps> = ({
   children,
   scores,
-  fetchState,
   currentTeam,
 }) => {
+  const fetchState = useSelector(selectScoreFetchState)
+  const fetchError = useSelector(selectScoreError)
+
   if (fetchState === FETCH_STATE.INITIAL_FETCHING) {
     return <LoadingScreen />
+  }
+
+  if (fetchError) {
+    return <ErrorMessage>{fetchError}</ErrorMessage>
   }
 
   return (

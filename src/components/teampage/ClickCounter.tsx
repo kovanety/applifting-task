@@ -1,7 +1,10 @@
-import React, { FC } from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
+
 import { FONT_SIZE, TEXT_COLOR, FONT_WEIGHT } from '../../constants'
 import { formatThousands } from '../../utils/formatThousands'
+import { selectClickScore } from '../../selectors/clickSelectors'
 
 const Container = styled.div`
   display: grid;
@@ -21,24 +24,18 @@ const Score = styled.div`
   font-style: normal;
 `
 
-interface ClickCounterProps {
-  teamScore: number
-  yourScore: number
-}
+export const ClickCounter = () => {
+  const { your_clicks, team_clicks } = useSelector(selectClickScore)
 
-export const ClickCounter: FC<ClickCounterProps> = ({
-  teamScore,
-  yourScore,
-}) => {
   return (
     <Container>
       <Column>
         Your clicks:
-        <Score>{formatThousands(yourScore)}</Score>
+        <Score>{formatThousands(your_clicks)}</Score>
       </Column>
       <Column>
         Team clicks:
-        <Score>{formatThousands(teamScore)}</Score>
+        <Score>{formatThousands(team_clicks)}</Score>
       </Column>
     </Container>
   )
